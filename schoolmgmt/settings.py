@@ -152,3 +152,18 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
     ),
 }
+
+# Rich Logging Configuration
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {"rich": {"datefmt": "[%X]"}},
+    "handlers": {
+        "console": {
+            "class": "rich.logging.RichHandler",
+            "formatter": "rich",
+            "level": "DEBUG",
+        }
+    },
+    "loggers": {"django": {"handlers": ["console"]}},
+}
