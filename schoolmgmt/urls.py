@@ -38,5 +38,6 @@ urlpatterns = [
     path('api/v1/', include('colleges.api.v1.urls')),
     path('api/v1/', include('departments.api.v1.urls')),
     path('api/v1/', include('courses.api.v1.urls')),
+    path('api/v1/', include('professors.api.v1.urls')),
     path('api/v1/docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
