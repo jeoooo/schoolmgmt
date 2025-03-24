@@ -18,7 +18,11 @@ The project is organized into the following main directories:
 - **Courses**: Manage courses within departments with CRUD operations.
 - **API Documentation**: Swagger UI for API documentation.
 
+---
+
 ## Setup
+
+### Without Docker
 
 1. **Clone the repository**:
     ```sh
@@ -50,6 +54,36 @@ The project is organized into the following main directories:
 6. **Access the application**:
     Open your browser and go to `http://127.0.0.1:8000/`.
 
+---
+
+### With Docker
+
+1. **Clone the repository**:
+    ```sh
+    git clone <repository-url>
+    cd schoolmgmt
+    ```
+
+2. **Build the Docker image**:
+    ```sh
+    docker-compose build
+    ```
+
+3. **Start the Docker containers**:
+    ```sh
+    docker-compose up
+    ```
+
+4. **Apply migrations**:
+    ```sh
+    docker-compose exec web python manage.py migrate
+    ```
+
+5. **Access the application**:
+    Open your browser and go to `http://localhost:8000/`.
+
+---
+
 ## API Endpoints
 
 - **Colleges**:
@@ -73,6 +107,11 @@ The project is organized into the following main directories:
     - `PUT /api/v1/courses/<id>/`: Update a course by ID.
     - `DELETE /api/v1/courses/<id>/`: Delete a course by ID.
 
+---
+
 ## API Documentation
 
-The API documentation is available at `http://127.0.0.1:8000/api/v1/docs/`.
+The API documentation is available at:
+
+- Without Docker: `http://127.0.0.1:8000/api/v1/docs/`
+- With Docker: `http://localhost:8000/api/v1/docs/`
