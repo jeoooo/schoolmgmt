@@ -9,25 +9,33 @@ class StudentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = [
-            'id', 
-            'department_id', 
-            'department_name', 
-            'name', 
-            'code',
-            # 'description', 
+            'id',
+            'department_id',
+            'department_name',
+            'first_name',
+            'last_name',
+            'student_id',
+            'email',
+            'contact_number',
         ]
-        read_only_fields = [
-            'date_created', 
-            'date_updated'
-        ]
-    
+
     def create(self, validated_data):
+        from departments.models import Department
         department_id = validated_data.pop('department_id')
-        student = Student.objects.create(department_id=department_id, **validated_data)
+        try:
+            department = Department.objects.get(id=department_id)
+        except Department.DoesNotExist:
+            raise serializers.ValidationError({'department_id': 'Invalid department ID.'})
+        student = Student.objects.create(department=department, **validated_data)
         return student
-    
+
     def update(self, instance, validated_data):
         department_id = validated_data.pop('department_id', None)
         if department_id is not None:
-            instance.department_id = department_id
+            from departments.models import Department
+            try:
+                department = Department.objects.get(id=department_id)
+            except Department.DoesNotExist:
+                raise serializers.ValidationError({'department_id': 'Invalid department ID.'})
+            instance.department = department
         return super().update(instance, validated_data)

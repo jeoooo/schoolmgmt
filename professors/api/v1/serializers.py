@@ -19,9 +19,14 @@ class ProfessorsSerializer(serializers.ModelSerializer):
         ]
     
     def create(self, validated_data):
-        department_id = validated_data.pop('department_id')
-        professor = Professor.objects.create(department_id=department_id, **validated_data)
-        return professor
+            from departments.models import Department
+            department_id = validated_data.pop('department_id')
+            try:
+                department = Department.objects.get(id=department_id)
+            except Department.DoesNotExist:
+                raise serializers.ValidationError({'department_id': 'Invalid department ID.'})
+            professor = Professor.objects.create(department=department, **validated_data)
+            return professor
     
     def update(self, instance, validated_data):
         department_id = validated_data.pop('department_id', None)

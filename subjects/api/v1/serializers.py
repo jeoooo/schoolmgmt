@@ -3,27 +3,37 @@ from subjects.models import Subject
 
 class SubjectSerializer(serializers.ModelSerializer):
     
+    course_name = serializers.CharField(source='course.name', read_only=True)
+    course_id = serializers.IntegerField(write_only=True)
+
     class Meta:
         model = Subject
         fields = [
-            'id', 
-            'department_id', 
-            'department_name', 
-            'name', 
-            'description', 
-        ]
-        read_only_fields = [
-            'date_created', 
-            'date_updated'
+            'id',
+            'course_id',
+            'course_name',
+            'name',
+            'code',
+            'description',
         ]
 
     def create(self, validated_data):
-        department_id = validated_data.pop('department_id')
-        subject = Subject.objects.create(department_id=department_id, **validated_data)
+        from courses.models import Course
+        course_id = validated_data.pop('course_id')
+        try:
+            course = Course.objects.get(id=course_id)
+        except Course.DoesNotExist:
+            raise serializers.ValidationError({'course_id': 'Invalid course ID.'})
+        subject = Subject.objects.create(course=course, **validated_data)
         return subject
 
     def update(self, instance, validated_data):
-        department_id = validated_data.pop('department_id', None)
-        if department_id is not None:
-            instance.department_id = department_id
+        course_id = validated_data.pop('course_id', None)
+        if course_id is not None:
+            from courses.models import Course
+            try:
+                course = Course.objects.get(id=course_id)
+            except Course.DoesNotExist:
+                raise serializers.ValidationError({'course_id': 'Invalid course ID.'})
+            instance.course = course
         return super().update(instance, validated_data)

@@ -5,9 +5,13 @@ from departments.models import Department
 
 # Create your models here.
 class Course(models.Model):
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if not self.name or not self.name.strip():
+            raise ValidationError({'name': 'Name cannot be empty or whitespace.'})
     department = models.ForeignKey('departments.Department', on_delete=models.CASCADE, related_name='courses')
-    name = models.CharField(max_length=255)
-    code = models.CharField(max_length=20, unique=True, blank=True)  # Example: "CS101"
+    name = models.CharField(max_length=255, blank=False, null=False)
+    code = models.CharField(max_length=20, unique=True, blank=False)  # Example: "CS101"
     description = models.TextField(blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)

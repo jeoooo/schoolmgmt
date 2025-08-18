@@ -257,41 +257,42 @@ class SchoolManagementValidationTest(TestCase):
             name="Test Department"
         )
     
-    def test_unique_constraints(self):
-        """Test unique constraints across models"""
-        # Create initial course
+    from django.db import IntegrityError
+
+    def test_course_unique_code(self):
         course1 = Course.objects.create(
             department=self.department,
             name="Course 1",
             code="C001"
         )
-        
-        # Test duplicate course code
-        with self.assertRaises(Exception):
+        with self.assertRaises(self.IntegrityError):
             Course.objects.create(
                 department=self.department,
                 name="Course 2",
-                code="C001"  # Duplicate code
+                code="C001"
             )
-        
-        # Create initial subject
+
+    def test_subject_unique_code(self):
+        course1 = Course.objects.create(
+            department=self.department,
+            name="Course 1",
+            code="C002"
+        )
         subject1 = Subject.objects.create(
             course=course1,
             name="Subject 1",
             code="S001",
             description="Test subject"
         )
-        
-        # Test duplicate subject code
-        with self.assertRaises(Exception):
+        with self.assertRaises(self.IntegrityError):
             Subject.objects.create(
                 course=course1,
                 name="Subject 2",
-                code="S001",  # Duplicate code
+                code="S001",
                 description="Another test subject"
             )
-        
-        # Create initial student
+
+    def test_student_unique_id(self):
         student1 = Student.objects.create(
             department=self.department,
             first_name="John",
@@ -300,34 +301,38 @@ class SchoolManagementValidationTest(TestCase):
             email="john.doe@test.edu",
             contact_number="123-456-7890"
         )
-        
-        # Test duplicate student ID
-        with self.assertRaises(Exception):
+        with self.assertRaises(self.IntegrityError):
             Student.objects.create(
                 department=self.department,
                 first_name="Jane",
                 last_name="Smith",
-                student_id="ST001",  # Duplicate student ID
+                student_id="ST001",
                 email="jane.smith@test.edu",
                 contact_number="098-765-4321"
             )
-    
-    def test_required_fields(self):
-        """Test that required fields are enforced"""
-        # College name is required
-        with self.assertRaises(Exception):
-            College.objects.create(address="Test Address")
-        
-        # Department name and college are required
-        with self.assertRaises(Exception):
+
+    def test_college_name_required(self):
+        from django.core.exceptions import ValidationError
+        college = College(address="Test Address")
+        with self.assertRaises(ValidationError):
+            college.full_clean()
+
+    def test_department_name_required(self):
+        from django.core.exceptions import ValidationError
+        department = Department(college=self.college)
+        with self.assertRaises(ValidationError):
+            department.full_clean()
+
+    def test_department_college_required(self):
+        with self.assertRaises(self.IntegrityError):
             Department.objects.create(name="Test Department")
-        
-        with self.assertRaises(Exception):
-            Department.objects.create(college=self.college)
-        
-        # Course name and department are required
-        with self.assertRaises(Exception):
-            Course.objects.create(department=self.department)
-        
-        with self.assertRaises(Exception):
+
+    def test_course_name_required(self):
+        from django.core.exceptions import ValidationError
+        course = Course(department=self.department)
+        with self.assertRaises(ValidationError):
+            course.full_clean()
+
+    def test_course_department_required(self):
+        with self.assertRaises(self.IntegrityError):
             Course.objects.create(name="Test Course")
