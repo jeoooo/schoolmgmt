@@ -3,12 +3,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
 from departments.models import Department
-from .serializers import DepartmentSerializer
+from .serializers import DepartmentsSerializer
 
 # get all departments and create a new department
 class DepartmentListCreate(generics.ListCreateAPIView):
     queryset = Department.objects.all()
-    serializer_class = DepartmentSerializer
+    serializer_class = DepartmentsSerializer
 
     
     def post(self, request, *args, **kwargs):
@@ -21,7 +21,7 @@ class DepartmentListCreate(generics.ListCreateAPIView):
 # get, update, delete department by ID 
 class DepartmentRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Department.objects.all()
-    serializer_class = DepartmentSerializer
+    serializer_class = DepartmentsSerializer
 
     def get(self, request, *args, **kwargs):
         department = self.get_object()

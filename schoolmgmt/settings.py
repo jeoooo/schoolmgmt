@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     
     # imports
     'rest_framework',               # Django REST framework        
-    'rest_framework_swagger',       # Swagger 
     'drf_yasg',                     # Yet Another Swagger generator
 
     # apps
@@ -49,6 +48,7 @@ INSTALLED_APPS = [
     'courses',
     'professors',
     'students',
+    'subjects',
 ]
 
 MIDDLEWARE = [
@@ -156,16 +156,16 @@ REST_FRAMEWORK = {
 }
 
 # Rich Logging Configuration
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {"rich": {"datefmt": "[%X]"}},
-    "handlers": {
-        "console": {
-            "class": "rich.logging.RichHandler",
-            "formatter": "rich",
-            "level": "DEBUG",
-        }
-    },
-    "loggers": {"django": {"handlers": ["console"]}},
-}
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "formatters": {"rich": {"datefmt": "[%X]"}},
+#     "handlers": {
+#         "console": {
+#             "class": "rich.logging.RichHandler",
+#             "formatter": "rich",
+#             "level": "DEBUG",
+#         }
+#     },
+#     "loggers": {"django": {"handlers": ["console"]}},
+# }

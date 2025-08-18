@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from professors.models import Professor
-from professors.api.v1.serializers import ProfessorsSerializer
 
 class ProfessorsSerializer(serializers.ModelSerializer):
     department_name = serializers.CharField(source='department.name', read_only=True)
@@ -13,13 +12,10 @@ class ProfessorsSerializer(serializers.ModelSerializer):
             'id', 
             'department_id', 
             'department_name', 
-            'name', 
-            'code',
-            # 'description', 
-        ]
-        read_only_fields = [
-            'date_created', 
-            'date_updated'
+            'first_name', 
+            'last_name',
+            'specialization',
+            'contact_number',
         ]
     
     def create(self, validated_data):

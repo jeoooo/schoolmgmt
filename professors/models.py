@@ -16,7 +16,7 @@ class Professor(models.Model):
         verbose_name_plural = _("Professors")
 
     def __str__(self):
-        return self.name
+        return f"{self.first_name} {self.last_name}"
 
     def get_absolute_url(self):
         return reverse("Professor_detail", kwargs={"pk": self.pk})

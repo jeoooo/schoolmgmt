@@ -1,8 +1,7 @@
 from rest_framework import serializers
 from departments.models import Department
-from colleges.api.v1.serializers import CollegeSerializer
         
-class DepartmentSerializer(serializers.ModelSerializer):
+class DepartmentsSerializer(serializers.ModelSerializer):
     college_name = serializers.CharField(source='college.name', read_only=True)
     college_id = serializers.IntegerField(write_only=True)
 

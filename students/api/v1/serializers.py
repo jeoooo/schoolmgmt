@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from students.models import Student
-from departments.api.v1.serializers import DepartmentsSerializer
 
 class StudentsSerializer(serializers.ModelSerializer):
     department_name = serializers.CharField(source='department.name', read_only=True)

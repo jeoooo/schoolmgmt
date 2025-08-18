@@ -1,9 +1,9 @@
 from django.contrib import admin
-from departments.models import Department
+from subjects.models import Subject
 
 # Register your models here.
 class SubjectAdmin(admin.ModelAdmin):
     list_display = ('id', 'course', 'name', 'code', 'description')
     list_filter = ('course',)
     
-admin.site.register(Department, DepartmentAdmin)
+admin.site.register(Subject, SubjectAdmin)
