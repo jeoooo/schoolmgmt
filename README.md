@@ -54,6 +54,9 @@ The project is organized into the following main directories:
 6. **Access the application**:
     Open your browser and go to `http://127.0.0.1:8000/`.
 
+7. **Access Swagger API Documentation**:
+    Open your browser and go to `http://127.0.0.1:8000/api/v1/docs/` for interactive API documentation.
+
 ---
 
 ## Commands & Cheat Sheet
@@ -196,6 +199,9 @@ python manage.py collectstatic
 
 5. **Access the application**:
     Open your browser and go to `http://localhost:8000/`.
+
+6. **Access Swagger API Documentation**:
+    Open your browser and go to `http://localhost:8000/api/v1/docs/` for interactive API documentation.
 
 ---
 
