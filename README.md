@@ -56,6 +56,120 @@ The project is organized into the following main directories:
 
 ---
 
+## Commands & Cheat Sheet
+
+### Database Management
+
+**Create and apply migrations**:
+```sh
+python manage.py makemigrations
+python manage.py migrate
+```
+
+**Reset database (SQLite)**:
+```sh
+# Delete the database file
+rm db.sqlite3  # On Windows: del db.sqlite3
+# Re-run migrations
+python manage.py migrate
+```
+
+**Create superuser**:
+```sh
+python manage.py createsuperuser
+```
+
+### Testing
+
+**Run all tests**:
+```sh
+python manage.py test
+```
+
+**Run tests with verbose output**:
+```sh
+python manage.py test --verbosity=2
+```
+
+**Run specific app tests**:
+```sh
+python manage.py test colleges
+python manage.py test departments
+python manage.py test courses
+python manage.py test students
+python manage.py test professors
+python manage.py test subjects
+```
+
+**Run integration tests**:
+```sh
+python manage.py test tests
+```
+
+**Run specific test methods**:
+```sh
+python manage.py test colleges.tests.CollegeModelTest.test_college_creation
+python manage.py test tests.test_integration.SchoolManagementIntegrationTest
+```
+
+### Development Server
+
+**Start development server**:
+```sh
+python manage.py runserver
+```
+
+**Start on specific port**:
+```sh
+python manage.py runserver 8080
+```
+
+**Start on all interfaces**:
+```sh
+python manage.py runserver 0.0.0.0:8000
+```
+
+### Django Shell
+
+**Open Django shell**:
+```sh
+python manage.py shell
+```
+
+**Example shell commands**:
+```python
+# Import models
+from colleges.models import College
+from departments.models import Department
+
+# Create objects
+college = College.objects.create(name="Test College", address="123 Main St")
+department = Department.objects.create(college=college, name="CS Department")
+
+# Query objects
+College.objects.all()
+Department.objects.filter(college=college)
+```
+
+### Utility Commands
+
+**Check for issues**:
+```sh
+python manage.py check
+```
+
+**Show migrations**:
+```sh
+python manage.py showmigrations
+```
+
+**Collect static files** (for production):
+```sh
+python manage.py collectstatic
+```
+
+---
+
 ### With Docker
 
 1. **Clone the repository**:
@@ -74,13 +188,83 @@ The project is organized into the following main directories:
     docker-compose up
     ```
 
-4. **Apply migrations**:
+4. **Apply migrations** (recommended to do locally):
     ```sh
-    docker-compose exec web python manage.py migrate
+    python manage.py makemigrations
+    python manage.py migrate
     ```
 
 5. **Access the application**:
     Open your browser and go to `http://localhost:8000/`.
+
+---
+
+## Docker Commands
+
+### Database Management
+
+**Apply migrations locally** (recommended):
+```sh
+python manage.py makemigrations
+python manage.py migrate
+```
+
+**Apply migrations inside Docker** (alternative):
+```sh
+docker-compose exec web python manage.py makemigrations
+docker-compose exec web python manage.py migrate
+```
+
+**Create superuser**:
+```sh
+docker-compose exec web python manage.py createsuperuser
+```
+
+### Testing
+
+**Run all tests**:
+```sh
+docker-compose exec web python manage.py test
+```
+
+**Run tests with verbose output**:
+```sh
+docker-compose exec web python manage.py test --verbosity=2
+```
+
+**Run specific app tests**:
+```sh
+docker-compose exec web python manage.py test colleges
+docker-compose exec web python manage.py test departments
+```
+
+### Container Management
+
+**Start containers**:
+```sh
+docker-compose up
+```
+
+**Start in background**:
+```sh
+docker-compose up -d
+```
+
+**Stop containers**:
+```sh
+docker-compose down
+```
+
+**Rebuild containers**:
+```sh
+docker-compose build
+docker-compose up --build
+```
+
+**View logs**:
+```sh
+docker-compose logs web
+```
 
 ---
 
