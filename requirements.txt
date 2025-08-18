@@ -1,0 +1,36 @@
+# Core Django
+Django>=5.1
+
+# Django REST Framework and API tools
+djangorestframework>=3.14
+drf-yasg>=1.21.7
+
+# Database (SQLite is default, uncomment psycopg2 if using PostgreSQL)
+# psycopg2>=2.9
+
+# Development and debugging tools
+django-debug-toolbar>=4.2.0
+django-extensions>=3.2.3
+
+# Rich logging (uncomment if using rich logging in settings)
+# rich>=13.7.0
+
+# Testing tools
+pytest>=7.4.0
+pytest-django>=4.5.2
+factory-boy>=3.3.0
+
+# Code quality and formatting
+flake8>=6.0.0
+black>=23.7.0
+isort>=5.12.0
+
+# Environment management
+python-decouple>=3.8
+
+# CORS handling for API
+django-cors-headers>=4.2.0
+
+# Additional utilities
+Pillow>=10.0.0  # For ImageField support
+python-dateutil>=2.8.2
