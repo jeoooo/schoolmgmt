@@ -22,9 +22,9 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="conf API Documentation",
+        title="schoolmgmt API Documentation",
         default_version='v1',
-        description="Test description",
+        description="schoolmgmt API Description",
         # terms_of_service="https://www.google.com/policies/terms/",
         # contact=openapi.Contact(email="contact@snippets.local"),
         # license=openapi.License(name="BSD License"),
