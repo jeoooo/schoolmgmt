@@ -22,6 +22,39 @@ The project is organized into the following main directories:
 
 ## Setup
 
+### With Docker
+
+1. **Clone the repository**:
+    ```sh
+    git clone <repository-url>
+    cd conf
+    ```
+
+2. **Build the Docker image**:
+    ```sh
+    docker-compose build
+    ```
+
+3. **Start the Docker containers**:
+    ```sh
+    docker-compose up
+    ```
+
+4. **Apply migrations** (recommended to do locally):
+    ```sh
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
+
+5. **Access the application**:
+    Open your browser and go to `http://localhost:8000/`.
+
+6. **Access Swagger API Documentation**:
+    Open your browser and go to `http://localhost:8000/api/v1/docs/` for interactive API documentation.
+
+---
+
+
 ### Without Docker
 
 1. **Clone the repository**:
@@ -170,38 +203,6 @@ python manage.py showmigrations
 ```sh
 python manage.py collectstatic
 ```
-
----
-
-### With Docker
-
-1. **Clone the repository**:
-    ```sh
-    git clone <repository-url>
-    cd conf
-    ```
-
-2. **Build the Docker image**:
-    ```sh
-    docker-compose build
-    ```
-
-3. **Start the Docker containers**:
-    ```sh
-    docker-compose up
-    ```
-
-4. **Apply migrations** (recommended to do locally):
-    ```sh
-    python manage.py makemigrations
-    python manage.py migrate
-    ```
-
-5. **Access the application**:
-    Open your browser and go to `http://localhost:8000/`.
-
-6. **Access Swagger API Documentation**:
-    Open your browser and go to `http://localhost:8000/api/v1/docs/` for interactive API documentation.
 
 ---
 
