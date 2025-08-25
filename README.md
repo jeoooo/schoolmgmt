@@ -9,7 +9,7 @@ The project is organized into the following main directories:
 - `colleges/`: Contains models, views, serializers, and URLs related to colleges.
 - `courses/`: Contains models, views, serializers, and URLs related to courses.
 - `departments/`: Contains models, views, serializers, and URLs related to departments.
-- `schoolmgmt/`: Contains the main project settings and configurations.
+- `conf/`: Contains the main project settings and configurations.
 
 ## Features
 
@@ -27,7 +27,7 @@ The project is organized into the following main directories:
 1. **Clone the repository**:
     ```sh
     git clone <repository-url>
-    cd schoolmgmt
+    cd conf
     ```
 
 2. **Create a virtual environment**:
@@ -178,7 +178,7 @@ python manage.py collectstatic
 1. **Clone the repository**:
     ```sh
     git clone <repository-url>
-    cd schoolmgmt
+    cd conf
     ```
 
 2. **Build the Docker image**:

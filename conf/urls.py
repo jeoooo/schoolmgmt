@@ -1,5 +1,5 @@
 """
-URL configuration for schoolmgmt project.
+URL configuration for conf project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -22,7 +22,7 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="SchoolMGMT API Documentation",
+        title="conf API Documentation",
         default_version='v1',
         description="Test description",
         # terms_of_service="https://www.google.com/policies/terms/",

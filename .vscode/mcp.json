@@ -1,6 +1,6 @@
 {
 	"servers": {
-		"schoolmgmt-django-mcp": {
+		"conf-django-mcp": {
 			"url": "https://mcp.context7.com/mcp",
 			"type": "http"
 		}

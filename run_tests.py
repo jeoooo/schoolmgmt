@@ -32,7 +32,7 @@ from django.test.utils import get_runner
 
 def setup_django():
     """Setup Django for testing"""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'schoolmgmt.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'conf.settings')
     django.setup()
 
 
