@@ -3,6 +3,7 @@ Django>=5.1
 
 # Django REST Framework and API tools
 djangorestframework>=3.14
+djangorestframework-simplejwt>=5.3.0
 drf-yasg>=1.21.7
 
 # Database (SQLite is default, uncomment psycopg2 if using PostgreSQL)

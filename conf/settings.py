@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # imports
     'rest_framework',               # Django REST framework        
     'rest_framework_simplejwt',     # JWT authentication
+    'rest_framework_simplejwt.token_blacklist',  # JWT token blacklist
     'corsheaders',                  # CORS headers
     'drf_yasg',                     # Yet Another Swagger generator
 

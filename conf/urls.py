@@ -19,6 +19,11 @@ from django.urls import path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -39,6 +44,14 @@ urlpatterns = [
     
     # authentication
     path('api/v1/', include('users.api.v1.urls')),
+    path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    
+    # include a route for Simple JWT’s TokenVerifyView 
+    # if you wish to allow API users to verify HMAC-signed tokens without having access to your signing key
+    # The TokenVerifyView provides no information about a token’s fitness for a particular use, 
+    # it only verifies if a token is valid or not, and return a 200 or 401 status code respectively.
+    path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     
     # api
     path('api/v1/', include('colleges.api.v1.urls')),
