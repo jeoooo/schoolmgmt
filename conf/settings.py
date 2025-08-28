@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'professors',
     'students',
     'subjects',
+    'enrollments',                  # Student course enrollments
 ]
 
 MIDDLEWARE = [
