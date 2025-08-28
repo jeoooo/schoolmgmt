@@ -20,6 +20,7 @@ django-extensions>=3.2.3
 pytest>=7.4.0
 pytest-django>=4.5.2
 factory-boy>=3.3.0
+faker>=19.0.0
 
 # Code quality and formatting
 flake8>=6.0.0

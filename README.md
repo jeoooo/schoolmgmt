@@ -9,6 +9,11 @@ The project is organized into the following main directories:
 - `colleges/`: Contains models, views, serializers, and URLs related to colleges.
 - `courses/`: Contains models, views, serializers, and URLs related to courses.
 - `departments/`: Contains models, views, serializers, and URLs related to departments.
+- `students/`: Contains models, views, serializers, and URLs related to students.
+- `professors/`: Contains models, views, serializers, and URLs related to professors.
+- `subjects/`: Contains models, views, serializers, and URLs related to subjects.
+- `enrollments/`: Contains models, views, serializers, and URLs related to course enrollments.
+- `users/`: Contains custom user model and authentication-related functionality.
 - `conf/`: Contains the main project settings and configurations.
 
 ## Features
@@ -16,6 +21,12 @@ The project is organized into the following main directories:
 - **Colleges**: Manage colleges with CRUD operations.
 - **Departments**: Manage departments within colleges with CRUD operations.
 - **Courses**: Manage courses within departments with CRUD operations.
+- **Students**: Manage student information and academic records.
+- **Professors**: Manage professor profiles and assignments.
+- **Subjects**: Manage academic subjects and curriculum.
+- **Enrollments**: Manage student course enrollments with status tracking (enrolled, completed, dropped, withdrawn) and grade management.
+- **User Management**: Custom user model with role-based access control.
+- **Test Data Generation**: Management command to populate realistic test data using Faker library.
 - **API Documentation**: Swagger UI for API documentation.
 
 ---
@@ -147,6 +158,37 @@ python manage.py test tests
 python manage.py test colleges.tests.CollegeModelTest.test_college_creation
 python manage.py test tests.test_integration.SchoolManagementIntegrationTest
 ```
+
+### Test Data Generation
+
+**Populate realistic test data using Faker**:
+```sh
+python manage.py populate_enrollment_data
+```
+
+**Clear existing data and populate with custom parameters**:
+```sh
+python manage.py populate_enrollment_data --clear --students 50 --colleges 3
+```
+
+**Available options**:
+- `--clear`: Clear all existing data before populating
+- `--students NUMBER`: Number of students to create (default: 100)
+- `--colleges NUMBER`: Number of colleges to create (default: 5)  
+- `--departments-per-college NUMBER`: Number of departments per college (default: 4)
+- `--courses-per-department NUMBER`: Number of courses per department (default: 6)
+
+**Example with all options**:
+```sh
+python manage.py populate_enrollment_data --clear --students 200 --colleges 5 --departments-per-college 6 --courses-per-department 8
+```
+
+This command creates realistic test data using the Faker library including:
+- Colleges with realistic names and addresses
+- Departments with academic discipline names
+- Courses with appropriate codes and descriptions
+- Students with student IDs and academic information
+- Course enrollments with various statuses (enrolled, completed, dropped, withdrawn) and grades
 
 ### Development Server
 
@@ -297,6 +339,44 @@ docker-compose logs web
     - `GET /api/v1/courses/<id>/`: Retrieve a course by ID.
     - `PUT /api/v1/courses/<id>/`: Update a course by ID.
     - `DELETE /api/v1/courses/<id>/`: Delete a course by ID.
+
+- **Students**:
+    - `GET /api/v1/students/`: List all students.
+    - `POST /api/v1/students/`: Create a new student.
+    - `GET /api/v1/students/<id>/`: Retrieve a student by ID.
+    - `PUT /api/v1/students/<id>/`: Update a student by ID.
+    - `DELETE /api/v1/students/<id>/`: Delete a student by ID.
+
+- **Professors**:
+    - `GET /api/v1/professors/`: List all professors.
+    - `POST /api/v1/professors/`: Create a new professor.
+    - `GET /api/v1/professors/<id>/`: Retrieve a professor by ID.
+    - `PUT /api/v1/professors/<id>/`: Update a professor by ID.
+    - `DELETE /api/v1/professors/<id>/`: Delete a professor by ID.
+
+- **Subjects**:
+    - `GET /api/v1/subjects/`: List all subjects.
+    - `POST /api/v1/subjects/`: Create a new subject.
+    - `GET /api/v1/subjects/<id>/`: Retrieve a subject by ID.
+    - `PUT /api/v1/subjects/<id>/`: Update a subject by ID.
+    - `DELETE /api/v1/subjects/<id>/`: Delete a subject by ID.
+
+- **Enrollments**:
+    - `GET /api/v1/enrollments/`: List all enrollments with filtering support.
+    - `POST /api/v1/enrollments/`: Create a new enrollment.
+    - `GET /api/v1/enrollments/<id>/`: Retrieve an enrollment by ID.
+    - `PUT /api/v1/enrollments/<id>/`: Update an enrollment by ID.
+    - `DELETE /api/v1/enrollments/<id>/`: Delete an enrollment by ID.
+    - `POST /api/v1/enrollments/<id>/complete/`: Mark enrollment as completed with grade.
+    - `POST /api/v1/enrollments/<id>/drop/`: Drop a student from enrollment.
+    - `POST /api/v1/enrollments/<id>/withdraw/`: Withdraw a student from enrollment.
+
+**Query Parameters for Enrollments**:
+- `student_id`: Filter by student ID
+- `course_id`: Filter by course ID
+- `status`: Filter by enrollment status (enrolled, completed, dropped, withdrawn)
+- `semester`: Filter by semester
+- `year`: Filter by academic year
 
 ---
 
