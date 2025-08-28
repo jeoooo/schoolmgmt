@@ -2,7 +2,10 @@
 	"servers": {
 		"conf-django-mcp": {
 			"url": "https://mcp.context7.com/mcp",
-			"type": "http"
+			"type": "http",
+			 "headers": {
+        		"CONTEXT7_API_KEY": "ctx7sk-b3d3fa5e-a2e2-4d0c-a369-931765da8f6c"
+      		}
 		}
 	},
 	"inputs": []
